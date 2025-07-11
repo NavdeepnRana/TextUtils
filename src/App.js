@@ -1,14 +1,15 @@
 import './App.css';
 import Navbar from './Components/Navbar';
 import Alert from './Components/Alert';
-// import About from './Components/About';
+import About from './Components/About'
 import Textform from './Components/Textform';
 import React,{useState} from 'react';
-// import {
-//   BrowserRouter as Router,  
-//   Routes,
-//   Route
-// } from "react-router-dom";
+
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
 
 
 
@@ -28,7 +29,17 @@ function App() {
     },2000);
   }
 
+  // const removeBodyClasses=()=>{
+  //   document.body.classList.remove('bg-light')
+  //   document.body.classList.remove('bg-dark')
+  //   document.body.classList.remove('bg-success')
+  //   document.body.classList.remove('bg-danger')
+  //   document.body.classList.remove('bg-warning')
+  // }
+  
   const toggleMode =() => {
+    // document.body.classList.add('bg-'+cls)
+    // removeBodyClasses()
     if(mode==='light'){
       setMode('dark');
       document.body.style.backgroundColor='grey';
@@ -44,23 +55,21 @@ function App() {
 
   return (
     <>
-    {/* <Router> */}
 
-    <Navbar title="React" abouttext="" mode={mode} toggleMode={toggleMode}/>
+    <Router>
+      
+    <Navbar title="React" abouttext="About" mode={mode} toggleMode={toggleMode}/>
     <Alert alert={alert}/>
     
         {/* https://v5.reactrouter.com/web/guides/quick-start */}
-      {/* <Routes>
-        <Route exact path="/about" element={<About />} />
-        </Routes> */}
-        {/* <Route exact path="/" element={}></Route> */}
         <div className="container my-3">
-          <Textform showAlert={showAlert} heading="Enter the text here" mode={mode}/>
+          <Routes> 
+              <Route path="/about" element={<About mode={mode}/>} />
+              <Route path="/" element={<Textform showAlert={showAlert} heading="Try TextUtils - Word Counter, Character Counter" mode={mode} />} />
+          </Routes>
         </div>
-           
 
-      {/* <About/> */}
-    {/* </Router> */}
+    </Router>
     </>
   );
 }
